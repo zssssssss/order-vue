@@ -31,6 +31,36 @@ app.get('/getData', function (req, res) {
   });
 })
 
+app.get('/getDisMonth', function (req, res) {
+  connection.query('select distinct month(date) month, year(date) year from 2021y09m', function (error, results) {
+    if (error) throw error;
+    res.send(results);
+  });
+})
+
+app.get('/getDisType', function (req, res) {
+  connection.query('select distinct type from 2021y09m', function (error, results) {
+    if (error) throw error;
+    res.send(results);
+  });
+})
+
+app.get('/getStaMonthMoney', function (req, res) {
+  connection.query(`select sum(A.price) money, A.year, A.month
+            from(select year(date) year, month(date) month, price from 2021y09m) A
+            group by A.year, A.month`, function (error, results) {
+    if (error) throw error;
+    res.send(results);
+  });
+})
+
+app.get('/getStaTypeMoney', function (req, res) {
+  connection.query(`select sum(price) money, type from 2021y09m group by type`, function (error, results) {
+    if (error) throw error;
+    res.send(results);
+  });
+})
+
 app.post('/getOrder', jsonParser, function (req, res) {
   let data = req.body
   connection.query(`select *
@@ -48,7 +78,24 @@ app.post('/action', function (req, res) {
 
 app.post('/runSql', jsonParser, (req, res) => {
   let data = req.body
-  console.log(data)
+  connection.query(data.sqlCommand,
+    (error, results) => {
+      if (error) res.send('failure');
+      res.send(results);
+    });
+})
+
+app.post('/siftMonth', jsonParser, (req, res) => {
+  let data = req.body
+  connection.query(data.sqlCommand,
+    (error, results) => {
+      if (error) res.send('failure');
+      res.send(results);
+    });
+})
+
+app.post('/siftType', jsonParser, (req, res) => {
+  let data = req.body
   connection.query(data.sqlCommand,
     (error, results) => {
       if (error) res.send('failure');

@@ -14,6 +14,13 @@
   align-items: center;
 }
 
+.flexRC {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .el-input {
   width: 100% !important;
 }
@@ -32,4 +39,21 @@ el-table__row > td {
 
 .el-table::-webkit-scrollbar {
   width: 0 !important;
+}
+
+.ldtable .el-button{
+  width: 100%
+}
+
+.el-table--scrollable-y ::-webkit-scrollbar {
+  display: none;
+}
+
+.disappear {
+  opacity: 0;
+}
+
+.appear {
+  opacity: 1;
+  transition: opacity 0s linear 0.3s;
 }

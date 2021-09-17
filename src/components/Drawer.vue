@@ -65,7 +65,7 @@ export default {
       fileList: [],
       drawerV: false,
       sqlVisible: false,
-      sqlCommand: ''
+      sqlCommand: '',
     }
   },
   methods: {
@@ -105,7 +105,6 @@ export default {
       this.drawerV = true
     },
     setSqlVisible() {
-      console.log('setSqlVisible')
       this.sqlVisible = !this.sqlVisible
     },
     runSql() {
@@ -113,7 +112,7 @@ export default {
         sqlCommand: this.sqlCommand
       }
       runSqlCom(data).then(res => {
-        console.log(res)
+        console.log('runSqlComResult', res)
         if(this.sqlCommand.substr(0, 6).toLowerCase() === 'select'){
           this.$emit('setdatalist', res)
         }
@@ -225,15 +224,6 @@ export default {
   top: 23px;
   left: 170px;
   cursor: pointer;
-}
-
-.disappear{
-  opacity: 0;
-}
-
-.appear{
-  opacity: 1;
-  transition: opacity 0s linear 0.3s;
 }
 
 </style>

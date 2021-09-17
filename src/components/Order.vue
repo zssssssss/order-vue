@@ -1,8 +1,10 @@
 <template>
   <div id="order" class="flexCC">
     <div class="drawerSwitch" @mouseenter="setDrawer"></div>
+    <div class="drawerSwitchLeft" @mouseenter="setLeftDrawer"></div>
     <el-table
       :data="dataList"
+      height="250"
       style="max-height: 70vh; overflow: auto; max-width: 90vw;"
     >
       <el-table-column
@@ -53,6 +55,7 @@
     </el-table>
     <Drawer ref="drawer" @getdatalist="getDataList" @setdatalist="setDataList"
             @beforeadd="beforeAdd"></Drawer>
+    <LeftDrawer ref="leftdrawer" @setdatalist="setDataList"></LeftDrawer>
     <ItemForm ref="item-form" @idetermine="determine"></ItemForm>
   </div>
 </template>
@@ -61,10 +64,11 @@
 import {getData, addOrder, delOrder, modOrder} from "../api/sql";
 import Drawer from "./Drawer";
 import ItemForm from "./ItemForm";
+import LeftDrawer from "./LeftDrawer";
 
 export default {
   name: "Order",
-  components: {Drawer, ItemForm},
+  components: {LeftDrawer, Drawer, ItemForm},
   data() {
     return {
       dataList: [],
@@ -99,7 +103,6 @@ export default {
         this.dataList.forEach((data) => {
           data.date = new Date(data.date).toLocaleDateString().replace(/[/]/g, '-')
         })
-        // console.log('result', this.dataList)
       })
     },
     setDataList(result) {
@@ -185,6 +188,9 @@ export default {
     },
     setDrawer() {
       this.$refs.drawer.setDrawer()
+    },
+    setLeftDrawer() {
+      this.$refs.leftdrawer.setDrawer()
     }
   }
 }
@@ -202,6 +208,15 @@ export default {
   width: 0.3vw;
   position: absolute;
   right: 0;
+  border-radius: 2px;
+  background-color: blueviolet;
+}
+
+.drawerSwitchLeft {
+  height: 30vh;
+  width: 0.3vw;
+  position: absolute;
+  left: 0;
   border-radius: 2px;
   background-color: blueviolet;
 }
