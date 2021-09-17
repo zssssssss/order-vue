@@ -1,0 +1,35 @@
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.flexCC {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.el-input {
+  width: 100% !important;
+}
+
+.el-input-number {
+  width: 100% !important;
+}
+
+el-table__row > td {
+  border: none !important;
+}
+
+.el-table::before {
+  height: 0px !important;
+}
+
+.el-table::-webkit-scrollbar {
+  width: 0 !important;
+}
