@@ -213,7 +213,7 @@ export default {
 }
 
 .elInput2 {
-  opacity: 100%;
+  opacity: 1;
   transition-property: opacity;
   transition-delay: 0.5s;
 }

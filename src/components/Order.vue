@@ -35,6 +35,7 @@
         label="日期"
         sortable
         align="center"
+        :formatter="formatDate"
       >
       </el-table-column>
       <el-table-column
@@ -79,37 +80,27 @@ export default {
   },
   mounted() {
     this.init()
-    // this.connectMySQL()
-    // getData()
-    // let data = {
-    //   id: 6,
-    //   name: 'test3',
-    //   price: 2,
-    //   date: '2021-9-14',
-    //   type: '2'
-    // }
-    // modOrder(data)
   },
   methods: {
     init() {
       this.getDataList()
     },
-    dateFormat(date) {
-      return new Date(date).toLocaleDateString().replace(/[/]/g, '-')
+    formatDate(row, column) {
+      // 获取单元格数据
+      let data = row[column.property]
+      if(data == null) {
+        return null
+      }
+      let dt = new Date(data)
+      return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate()
     },
     getDataList() {
       getData().then(result => {
         this.dataList = result
-        this.dataList.forEach((data) => {
-          data.date = new Date(data.date).toLocaleDateString().replace(/[/]/g, '-')
-        })
       })
     },
     setDataList(result) {
       this.dataList = result
-      this.dataList.forEach((data) => {
-        data.date = new Date(data.date).toLocaleDateString().replace(/[/]/g, '-')
-      })
     },
     determine(inputForm) {
       if (this.method === 'add') {
